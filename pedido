@@ -1,0 +1,611 @@
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+import java.sql.PreparedStatement;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import javax.management.Query;
+import javax.management.StringValueExp;
+import javax.swing.JOptionPane;
+
+public class Pedidos extends javax.swing.JFrame {
+    DefaultTableModel modelo2;
+    Coneccion con2 = new Coneccion();
+    Connection conet;
+    DefaultTableModel modelo;
+    Statement st;
+    ResultSet rs;
+    PreparedStatement sto;
+    int idc;
+    
+    
+    
+    
+    public Pedidos() {
+        initComponents();
+        setLocationRelativeTo(null);
+        rsscalelabel.RSScaleLabel.setScaleLabel(fondoPedidos,"src/Imagenes/A4.png");
+        cantiCanti.setVisible(false);
+        ideide.setVisible(false);
+        consultarPedidos();
+        consultarPedidosEn();
+        
+    }
+
+  
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaPedi2 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaPedi1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtFolio = new javax.swing.JTextField();
+        txtProducto = new javax.swing.JTextField();
+        txtProveedor = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        cantiCanti = new javax.swing.JTextField();
+        ideide = new javax.swing.JTextField();
+        btnClean = new javax.swing.JButton();
+        fondoPedidos = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TablaPedi2.setBackground(new java.awt.Color(178, 148, 110));
+        TablaPedi2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Folio:", "Proveedor", "Producto", "Cantidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TablaPedi2);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 375, -1, 144));
+
+        TablaPedi1.setBackground(new java.awt.Color(178, 148, 110));
+        TablaPedi1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Folio", "Proveedor", "Producto", "Cantidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        TablaPedi1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaPedi1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TablaPedi1);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 198, -1, 143));
+
+        jLabel1.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("PÉDIDOS");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 86, -1));
+
+        jLabel2.setText("Folio:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 37, -1));
+
+        jLabel3.setText("Producto:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 62, -1));
+
+        jLabel4.setText("Proveedor:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 88, 66, -1));
+
+        jLabel5.setText("Cantidad:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 127, -1, -1));
+        getContentPane().add(txtFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 85, 115, -1));
+
+        txtProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 124, 115, -1));
+        getContentPane().add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 85, 102, -1));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 124, 102, -1));
+
+        jLabel6.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("PENDIENTES");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 80, -1));
+
+        jLabel7.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("PEDIDOS ENTREGADOS");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(102, 0, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Pedir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 540, 120, -1));
+
+        jButton2.setBackground(new java.awt.Color(102, 0, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Entregado");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, 140, -1));
+
+        jButton3.setBackground(new java.awt.Color(102, 0, 0));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 120, -1));
+
+        jButton4.setBackground(new java.awt.Color(102, 0, 0));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 580, 120, -1));
+
+        jButton5.setBackground(new java.awt.Color(102, 0, 0));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Nuevo Producto");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 580, 140, 30));
+
+        jButton6.setBackground(new java.awt.Color(182, 15, 15));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Menú");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 580, 120, -1));
+
+        cantiCanti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantiCantiActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cantiCanti, new org.netbeans.lib.awtextra.AbsoluteConstraints(513, 10, 71, -1));
+
+        ideide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ideideActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ideide, new org.netbeans.lib.awtextra.AbsoluteConstraints(513, 38, 71, -1));
+
+        btnClean.setBackground(new java.awt.Color(102, 0, 0));
+        btnClean.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnClean.setForeground(new java.awt.Color(255, 255, 255));
+        btnClean.setText("C/O");
+        btnClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCleanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 347, -1, -1));
+        getContentPane().add(fondoPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 620));
+
+        pack();
+    }// </editor-fold>                        
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        modificarPed();
+        consultarPedidos();
+        limpiarJTextFiel();
+    }                                        
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        Inventario a = new Inventario();
+        a.setVisible(true);
+        this.setVisible(false);
+    }                                        
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        Menu a = new Menu ();
+        a.setVisible(true);
+        this.setVisible(false);
+    }                                        
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        pedir();
+        consultarPedidos();
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        entregado();
+        entregado2();
+        consultarPedidos();
+        consultarPedidosEn();
+        limpiarJTextFiel();
+        
+    }                                        
+
+    private void TablaPedi1MouseClicked(java.awt.event.MouseEvent evt) {                                        
+        // TODO add your handling code here:
+        int fila = TablaPedi1.getSelectedRow(); 
+        if (fila <0 ){
+            JOptionPane.showMessageDialog(null,"No se selecciono una fila");
+        }else{
+            
+            String folio = (String) TablaPedi1.getValueAt(fila,0);
+            String prov = (String) TablaPedi1.getValueAt(fila,1);
+            String pro = (String) TablaPedi1.getValueAt(fila,2);
+            int can = Integer.parseInt((String) TablaPedi1.getValueAt(fila,3).toString());
+            
+        
+            txtFolio.setText(""+folio);
+            txtProveedor.setText(""+prov);
+            txtProducto.setText(""+pro);
+            txtCantidad.setText(""+can);
+        }
+    }                                       
+
+    private void cantiCantiActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void ideideActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        eliminarPed();
+        consultarPedidos();
+        limpiarJTextFiel();
+    }                                        
+
+    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        limpiarJTextFiel();
+    }                                        
+
+    
+    //________________________METODOS_________________________
+    
+    
+    void limpiarJTextFiel(){
+        txtFolio.setText("");
+        txtProveedor.setText("");
+        txtProducto.setText("");
+        txtCantidad.setText("");
+    }
+    
+    
+    void eliminarPed(){
+        int folio = Integer.parseInt(txtFolio.getText());
+        int filas=TablaPedi1.getSelectedRow();
+         
+        try {
+            
+            if(filas<0){
+                JOptionPane.showMessageDialog(null,"Fila no seleccionada");
+            
+            }else{
+                String sql="delete from pedidos where Folio="+folio;
+                conet = (Connection) con2.getConeccion();
+                st = (Statement) conet.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null,"Pedido Cancelado");
+                limpiarTabla1();
+            }
+                    
+        } catch (Exception e) {
+        }
+        
+        
+        
+    }
+    
+    void modificarPed(){
+        
+     int folio = Integer.parseInt(txtFolio.getText());
+     String prove = txtProveedor.getText();
+     String pro = txtProducto.getText();
+     int can = Integer.parseInt(txtCantidad.getText());
+        
+     
+        try {
+            
+                String sql = "Update pedidos set Proveedor='"+prove+"',Producto='"+pro+"',Cantidad='"+can+"' where Folio="+folio;
+                conet = (Connection) con2.getConeccion();
+                st = (Statement) conet.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null,"Modificado");
+                limpiarTabla1();
+            
+        } catch (Exception e) {
+            
+        }
+     
+     
+        
+        
+    }
+    
+    void consultarPedidos(){
+        String sql = "select *from pedidos where Estado=0";
+        //Consultar pedidos pendientes
+        try {
+            conet = (Connection) con2.getConeccion();
+            st =  (Statement) conet.createStatement();
+            rs = st.executeQuery(sql);
+            Object [] obj1 = new Object[4];
+            modelo = (DefaultTableModel) TablaPedi1.getModel();
+            while (rs.next()){
+                obj1 [0]= rs.getString("Folio");
+                obj1 [1]= rs.getString("Proveedor");
+                obj1 [2]= rs.getString("Producto");
+                obj1 [3]= rs.getInt("Cantidad");
+                modelo.addRow(obj1);
+            }              
+            TablaPedi1.setModel(modelo);
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    void consultarPedidosEn(){
+        String sql2 = "select *from pedidos where Estado=1";
+        //Consultar Pedidos Recibidos
+        try {
+            conet = (Connection) con2.getConeccion();
+            st =  (Statement) conet.createStatement();
+            rs = st.executeQuery(sql2);
+            Object [] obj2 = new Object[4];
+            modelo2 = (DefaultTableModel) TablaPedi2.getModel();
+            while (rs.next()){
+                obj2 [0]= rs.getString("Folio");
+                obj2 [1]= rs.getString("Proveedor");
+                obj2 [2]= rs.getString("Producto");
+                obj2 [3]= rs.getInt("Cantidad");
+                modelo2.addRow(obj2);
+            }              
+            TablaPedi2.setModel(modelo2);
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    void pedir(){
+        int Folio = Integer.parseInt(txtFolio.getText());
+        String prove = txtProveedor.getText();
+        String prod = txtProducto.getText();
+        int can = Integer.parseInt(txtCantidad.getText());
+       
+        try {
+            if(prove.equals("") ){
+                limpiarTabla1();
+            JOptionPane.showMessageDialog(null,"Por favor llene los registros");
+            }else{
+                
+                String sql = "insert into pedidos(Folio, Proveedor, Producto, Cantidad,Estado) values ('"+Folio+"','"+prove+"','"+prod+"','"+can+"','"+0+"')";
+                conet = (Connection) con2.getConeccion();
+                st = (Statement) conet.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null,"Pedido Realizado");
+                limpiarTabla1();
+            }
+        } catch (Exception e) {
+        }
+    }
+        //Metodo Entregado
+    
+    void entregado(){
+        
+        //Consulta para cambiar el inventario
+        try {
+                JOptionPane.showMessageDialog(null,"PrimerTry");
+                Connection conet2 = (Connection) con2.getConeccion();
+                PreparedStatement st2 = conet2.prepareStatement("select* FROM inventario where Nombre = ?");
+                st2.setString(1,txtProducto.getText().trim());
+                rs = st2.executeQuery();               
+                if(rs.next()){
+                    cantiCanti.setText(rs.getString("Cantidad"));
+                    ideide.setText(rs.getString("ID"));
+                }
+                
+                 } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Producto no encotrado");
+            }
+        
+  
+        //Actualizar estado del pedido
+        
+        /*try {
+           JOptionPane.showMessageDialog(null,"Tercer try");
+            String sql3 = "Update pedidos set Estado='"+1+"' where Producto="+prod;
+            Connection conet2 = (Connection) con2.getConeccion();
+            Statement sto = (Statement) conet.createStatement();
+            sto.executeUpdate(sql3);
+            JOptionPane.showMessageDialog(null,"Estado cambiado");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Algo salio mal con el Estado");       
+        }*/
+        
+        
+        
+        
+    }
+   
+    void entregado2(){
+        //Leyando variables
+        
+        int ide = Integer.parseInt(ideide.getText());
+        int folio = Integer.parseInt(txtFolio.getText());
+        int canInv = Integer.parseInt(cantiCanti.getText());
+        int cantP= Integer.parseInt(txtCantidad.getText());
+        int nuCan= canInv + cantP;
+        JOptionPane.showMessageDialog(null,"Datos recogidos"+canInv+" "+ide+" "+folio);
+        
+        try {
+            
+            String sql = "Update inventario set Cantidad='"+nuCan+"' where ID="+ide;
+            conet = (Connection) con2.getConeccion();
+            st = (Statement) conet.createStatement();
+            st.executeUpdate(sql);
+            limpiarTabla2();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Algo salio mal al actualizar el inventario");
+            
+        }
+        
+        try {
+            JOptionPane.showMessageDialog(null,"Primer Try");
+            String sql = "Update pedidos set Estado='"+1+"' where Folio="+folio;
+            JOptionPane.showMessageDialog(null, "Consulta creada");
+            conet = (Connection) con2.getConeccion();
+            JOptionPane.showMessageDialog(null, "Conexion completada");
+            st = (Statement) conet.createStatement();
+            JOptionPane.showMessageDialog(null, "Statement");
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Inventario modificado");
+            limpiarTabla1();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Algo salio mal al modificar el estado");
+            
+        }
+        
+        
+        
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Pedidos().setVisible(true);
+            }
+        });
+    }
+     public void limpiarTabla1(){
+        for(int i=0; i<=TablaPedi1.getRowCount();i++){
+            modelo.removeRow(i);
+            i=i-1;
+        }
+   }
+    public void limpiarTabla2(){
+        for(int i=0; i<=TablaPedi2.getRowCount();i++){
+            modelo2.removeRow(i);
+            i=i-1;
+        }
+    }
+    // Variables declaration - do not modify                     
+    private javax.swing.JTable TablaPedi1;
+    private javax.swing.JTable TablaPedi2;
+    private javax.swing.JButton btnClean;
+    private javax.swing.JTextField cantiCanti;
+    private javax.swing.JLabel fondoPedidos;
+    private javax.swing.JTextField ideide;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtFolio;
+    private javax.swing.JTextField txtProducto;
+    private javax.swing.JTextField txtProveedor;
+    // End of variables declaration                   
+}
